@@ -23,7 +23,7 @@ public class DimmerUtilities : MonoBehaviour
             globalDimmerSlider.value = newValue;
             Logger.Instance.LogInfo($"{GLOBAL_DIMMER_TEXT} set to: {newValue:0.00}");
             globalDimmerText.text = $"{GLOBAL_DIMMER_TEXT}: {newValue:0.00}";
-            SetGlobalDimmerValue(0);
+            SetGlobalDimmerValue(newValue);
         });
     }
 
