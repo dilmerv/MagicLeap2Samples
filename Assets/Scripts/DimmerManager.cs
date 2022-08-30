@@ -1,9 +1,11 @@
+using System.Collections;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.XR.MagicLeap;
 
-public class DimmerUtilities : MonoBehaviour
+public class DimmerManager : MonoBehaviour
 {
     private const string GLOBAL_DIMMER_TEXT = "Global Dimmer";
 
@@ -13,19 +15,18 @@ public class DimmerUtilities : MonoBehaviour
     [SerializeField]
     private Slider globalDimmerSlider;
 
-    private void Start()
+    void Start()
     {
         globalDimmerSlider.value = 0;
-        globalDimmerText.text = $"{GLOBAL_DIMMER_TEXT}: {0.00}";
-        SetGlobalDimmerValue(0);
+        globalDimmerText.text = $"{GLOBAL_DIMMER_TEXT} {0.00}";
+        SetGlobalDimmer(0);
         globalDimmerSlider.onValueChanged.AddListener((newValue) =>
         {
-            globalDimmerSlider.value = newValue;
-            Logger.Instance.LogInfo($"{GLOBAL_DIMMER_TEXT} set to: {newValue:0.00}");
-            globalDimmerText.text = $"{GLOBAL_DIMMER_TEXT}: {newValue:0.00}";
-            SetGlobalDimmerValue(newValue);
+            SetGlobalDimmer(newValue);
+            globalDimmerText.text = $"{GLOBAL_DIMMER_TEXT} {newValue:0.00}";
+            Logger.Instance.LogInfo($"{GLOBAL_DIMMER_TEXT} {newValue:0.00}");
         });
     }
 
-    private void SetGlobalDimmerValue(float newValue) => MLGlobalDimmer.SetValue(newValue);
+    void SetGlobalDimmer(float newValue) => MLGlobalDimmer.SetValue(newValue);
 }
